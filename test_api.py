@@ -8,10 +8,16 @@ def get_stock_info(ticker):
     print("Stock Info:")
     print(info)
 
+def get_stock_returns(ticker, period='1mo'):
+    stock = yf.Ticker(ticker)
+    returns = stock.history(period=period)['Close'].pct_change()
+    print("Stock Returns:", ticker)
+    print(returns)
+
 def get_stock_history(ticker, period='1mo'):
     stock = yf.Ticker(ticker)
     history = stock.history(period=period)
-    print("Stock History:")
+    print("Stock History:", ticker)
     print(history)
 
 def get_dividends(ticker):
@@ -72,7 +78,8 @@ def get_beta(ticker):
     stock = yf.Ticker(ticker)
     if 'beta' in stock.info:
         beta = stock.info['beta']
-        print("Beta: {beta}")
+        print("Beta:")
+        print(beta)
     else: 
         print("Beta not available for {ticker}")
         
@@ -114,6 +121,7 @@ def get_holdings(ticker):
 # Example usage
 ticker = "SOXQ"
 
+#this is just saving the calls
 """get_stock_info(ticker)
 get_stock_history(ticker)
 get_dividends(ticker)
