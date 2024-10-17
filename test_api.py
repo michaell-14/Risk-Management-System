@@ -11,14 +11,14 @@ def get_stock_info(ticker):
 def get_stock_returns(ticker, period='1mo'):
     stock = yf.Ticker(ticker)
     returns = stock.history(period=period)['Close'].pct_change()
-    print("Stock Returns:", ticker)
-    print(returns)
+    #print("Stock Returns:", ticker)
+    #print(returns)
 
 def get_stock_history(ticker, period='1mo'):
     stock = yf.Ticker(ticker)
     history = stock.history(period=period)
-    print("Stock History:", ticker)
-    print(history)
+    #print("Stock History:", ticker)
+    #print(history)
 
 def get_dividends(ticker):
     stock = yf.Ticker(ticker)

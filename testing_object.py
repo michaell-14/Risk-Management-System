@@ -1,5 +1,4 @@
 import numpy
-import matplotlib.pyplot as plt
 import test_api
 
 def etf_data():
