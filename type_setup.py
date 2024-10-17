@@ -1,6 +1,10 @@
-import numpy
-import matplotlib.pyplot as plt
 import test_api
+import testing_object as tp
+import numpy
+
+select = input("ETF or Stock: ")
+select = select.upper()
+#stock or etf functions
 
 def etf_data():
     test_api.get_current_stock_price(ticker)
@@ -8,7 +12,6 @@ def etf_data():
     test_api.get_fund_data(ticker)
     test_api.get_holdings(ticker)
     #test_api.get_beta(ticker)
-
 def stock_data():
     test_api.get_current_stock_price(ticker)
     test_api.get_balance_sheet(ticker)
@@ -18,16 +21,11 @@ def stock_data():
     test_api.get_recommendations(ticker)
     #test_api.get_beta(ticker)
 
-select = input("ETF or Stock: ")
-select = select.upper()
-
 if select == "ETF":
-    ticker = input("Enter an ETF ticker: ")
-    ticker = ticker.upper()
-    #ticker = "SOXQ" #manual override
     print(etf_data())
+
+if  select == "STOCK": 
+    print(stock_data())  
+
 else:
-    ticker = input("Enter a stock ticker: ")
-    ticker = ticker.upper()
-    #ticker = "NVDA" #manual override
-    print(stock_data())
+    print("Invalid selection")
