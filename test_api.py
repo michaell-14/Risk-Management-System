@@ -68,6 +68,15 @@ def get_recommendations(ticker):
     print("Recommendations:")
     print(recommendations)
 
+def get_beta(ticker):
+    stock = yf.Ticker(ticker)
+    if 'beta' in stock.info:
+        beta = stock.info['beta']
+        print("Beta: {beta}")
+    else: 
+        print("Beta not available for {ticker}")
+        
+
 # Function to get current stock price using yfinance
 def get_current_stock_price(ticker):
     stock = yf.Ticker(ticker)
@@ -86,17 +95,24 @@ def get_fund_data(ticker):
     stock = yf.Ticker(ticker)
     fund_data = stock.funds_data
     assests = fund_data.asset_classes
-    holdings = fund_data.top_holdings
+    top_holdings = fund_data.top_holdings
     weights = fund_data.sector_weightings
-    print("Asset Classes:")
-    print(assests)
+    #print("Asset Classes:")
+    #print(assests)
     print("Top Holdings:")
-    print(holdings)
+    print(top_holdings)
     print("Sector Weightings:")
     print(weights)
+    
+def get_holdings(ticker):
+    stock = yf.Ticker(ticker)
+    data = stock.funds_data
+    holdings = data.equity_holdings
+    print("Equity Holdings:")
+    print(holdings)
 
 # Example usage
-ticker = "SOXL"
+ticker = "SOXQ"
 
 """get_stock_info(ticker)
 get_stock_history(ticker)
@@ -110,7 +126,7 @@ get_earnings(ticker)
 get_sustainability(ticker)
 get_recommendations(ticker)"""""
 
-# Continuously get stock history
+# Continuously get stock history; only update every 11 seconds
 #while True: #cntrl + c to stop
   #  get_current_stock_price(ticker)
   #  time.sleep(11)
