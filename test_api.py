@@ -7,18 +7,21 @@ def get_stock_info(ticker):
     info = stock.info
     print("Stock Info:")
     print(info)
+    return info
 
-def get_stock_returns(ticker, period='1mo'):
+def get_stock_returns(ticker, period='1y'):
     stock = yf.Ticker(ticker)
     returns = stock.history(period=period)['Close'].pct_change()
     #print("Stock Returns:", ticker)
     #print(returns)
+    return returns
 
-def get_stock_history(ticker, period='1mo'):
+def get_stock_history(ticker, period='1y'):
     stock = yf.Ticker(ticker)
     history = stock.history(period=period)
     #print("Stock History:", ticker)
     #print(history)
+    return history
 
 def get_dividends(ticker):
     stock = yf.Ticker(ticker)
