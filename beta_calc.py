@@ -29,7 +29,7 @@ print("-------------------------------------------------------------------------
 return_ratio = avg_return / avg_return1
 print("Return Ratio:", return_ratio)
 
-#Variability of the stock's returns
+#Variability of the STOCKS's returns
 vair = np.var(ticker_return)
 vair_calc = ((ticker_return - avg_return)**2).sum()/(len(ticker_return)-1)
 vair_avg = (vair + vair_calc)/2
@@ -37,13 +37,16 @@ print("Variance: ", vair)
 print("Variance Calculation: ", vair_calc)
 print("Average Variance: ", vair_avg)
 
+#Variability of the S&P 500's returns; used for Beta calculation
+var_bm = np.var(ticker_1_return)
+
 #Covariance of the stock's returns with the S&P 500's returns
 cov_calc = ((ticker_return - avg_return)*(ticker_1_return - avg_return1)).sum()/(len(ticker_return)-1)
 print("Covariance Calculation: ", cov_calc)
 
 #Beta Calculation
 #Beta = Covariance(Stock, or Market) / Variance(Market (benchmark))
-beta_calc = cov_calc/vair
+beta_calc = cov_calc/var_bm
 print("Beta: ", beta_calc)
 #Beta < 0 means the stock moves in the opposite direction of the market, Beta = 0 means the stock is uncorrelated with the market, Beta > 0 means the stock moves in the same direction as the market
 #beta of ^GSPC = 1.0 --> market benchmark
