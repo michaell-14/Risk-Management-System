@@ -1,6 +1,7 @@
 import numpy
 import test_api
 
+
 def etf_data():
     test_api.get_current_stock_price(ticker)
     test_api.get_stock_history(ticker)
