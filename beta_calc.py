@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import test_api as api
+import api as api
 
 # 252 trading days in a year, 21 trading days in a month, 63 trading days in a quarter
 # Beta = Covariance(Stock, Market) / Variance(Market)

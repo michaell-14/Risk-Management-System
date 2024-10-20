@@ -1,5 +1,5 @@
-import test_api
-import testing_object as tp
+import api
+import main
 import numpy
 
 select = input("ETF or Stock: ")
@@ -7,18 +7,17 @@ select = select.upper()
 #stock or etf functions
 
 def etf_data():
-    test_api.get_current_stock_price(ticker)
-    test_api.get_stock_history(ticker)
-    test_api.get_fund_data(ticker)
-    test_api.get_holdings(ticker)
-    #test_api.get_beta(ticker)
+    api.get_current_stock_price(main.ticker)
+    api.get_stock_history(main.ticker)
+    api.get_fund_data(main.ticker)
+    api.get_holdings(main.ticker)
 def stock_data():
-    test_api.get_current_stock_price(ticker)
-    test_api.get_balance_sheet(ticker)
-    test_api.get_cashflow(ticker)
-    test_api.get_earnings(ticker)
-    test_api.get_sustainability(ticker)
-    test_api.get_recommendations(ticker)
+    api.get_current_stock_price(main.ticker)
+    api.get_balance_sheet(main.ticker)
+    api.get_cashflow(main.ticker)
+    api.get_earnings(main.ticker)
+    api.get_sustainability(main.ticker)
+    api.get_recommendations(main.ticker)
     #test_api.get_beta(ticker)
 
 if select == "ETF":

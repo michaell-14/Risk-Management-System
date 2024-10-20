@@ -1,21 +1,21 @@
 import numpy
-import test_api
+import api
 
 
 def etf_data():
-    test_api.get_current_stock_price(ticker)
-    test_api.get_stock_history(ticker)
-    test_api.get_fund_data(ticker)
-    test_api.get_holdings(ticker)
+    api.get_current_stock_price(ticker)
+    api.get_stock_history(ticker)
+    api.get_fund_data(ticker)
+    api.get_holdings(ticker)
     #test_api.get_beta(ticker)
 
 def stock_data():
-    test_api.get_current_stock_price(ticker)
-    test_api.get_balance_sheet(ticker)
-    test_api.get_cashflow(ticker)
-    test_api.get_earnings(ticker)
-    test_api.get_sustainability(ticker)
-    test_api.get_recommendations(ticker)
+    api.get_current_stock_price(ticker)
+    api.get_balance_sheet(ticker)
+    api.get_cashflow(ticker)
+    api.get_earnings(ticker)
+    api.get_sustainability(ticker)
+    api.get_recommendations(ticker)
     #test_api.get_beta(ticker)
 
 select = input("ETF or Stock: ")

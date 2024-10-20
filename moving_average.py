@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import test_api as api
+import api as api
 
 
 # Get stock data for "stock"
