@@ -6,22 +6,23 @@ import test_api as api
 
 # Get stock data for "stock"
 api.ticker = "NVDA"  # Manual override
-ticker_return = api.get_stock_returns(api.ticker, period='1mo') #will return the stock returns for the last month
-avg_return = np.mean(ticker_return)
-print("Average Return: ", api.ticker, avg_return)
+ticker_price = api.get_current_stock_price(api.ticker) #will return the stock returns for the last month
+ticker_history = api.get_stock_history(api.ticker, "1mo")
 
-# Get stock data for S&P 500, ^GSPC
-api.ticker = "^GSPC"  # Manual override for S&P 500
-ticker_1_return = api.get_stock_returns(api.ticker, period='1mo')  
-avg_return1 = np.mean(ticker_1_return)
-print("Average Return: ", api.ticker, avg_return1)
+ticker_close = ticker_history["Close"]
+ticker_close_list = ticker_close.tolist()
+print("close: ", ticker_close_list) #this will return the closing prices for the last month in a list
+
+ticker_average = np.mean(ticker_close_list)
+print("average: ", ticker_average) #this will return the average closing price for the last month
+
 
 #Simple Moving Average (SMA)
 #SMA = (Sum of Price from N periods) / N
 
-len(ticker_return) #number of trading days --> this would give 1 ytd N = 252; the sma for the last year correlated trading days 
+n = len(ticker_close_list) #number of trading days --> this would give N = the period called in function
 
-sma_stock = (ticker_return.sum())/len(ticker_return) 
+sma_stock = sum(ticker_close_list)/n
 print("Simple Moving Average: ", sma_stock)
 
 #Exponential Moving Average (EMA)

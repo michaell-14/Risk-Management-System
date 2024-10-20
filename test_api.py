@@ -76,30 +76,19 @@ def get_recommendations(ticker):
     recommendations = stock.recommendations
     print("Recommendations:")
     print(recommendations)
-
-def get_beta(ticker):
-    stock = yf.Ticker(ticker)
-    if 'beta' in stock.info:
-        beta = stock.info['beta']
-        print("Beta:")
-        print(beta)
-    else: 
-        print("Beta not available for {ticker}")
         
 
 # Function to get current stock price using yfinance
 def get_current_stock_price(ticker):
     stock = yf.Ticker(ticker)
-    
-    # Get the latest stock info
     stock_info = stock.history(period='1d')
     
     # Extract the close price for the most recent day
     if not stock_info.empty:
         current_price = stock_info['Close'].iloc[-1]
-        print(f"Current stock price for {ticker}: ${current_price}")
     else:
         print(f"No data available for {ticker}")
+    return current_price
 
 def get_fund_data(ticker):
     stock = yf.Ticker(ticker)
@@ -137,7 +126,7 @@ get_earnings(ticker)
 get_sustainability(ticker)
 get_recommendations(ticker)"""""
 
-# Continuously get stock history; only update every 11 seconds
+# Continuously get stock history; only update every 11 seconds; this was found by trial and error with the yfinance API
 #while True: #cntrl + c to stop
   #  get_current_stock_price(ticker)
   #  time.sleep(11)
