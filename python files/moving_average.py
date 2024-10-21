@@ -19,6 +19,11 @@ ticker_average = np.mean(ticker_close_list)
 #standard deviation
 ticker_std = np.std(ticker_close_list)
 
+#volatility
+ticker_volatility = ticker_std / np.mean(ticker_close_list)
+print("Volatility: ", ticker_volatility)
+
+
 
 print("Close Prices: ", ticker_close_list)  # This will return the stock closing prices for the last month
 print("Average Closing Price: ", ticker_average)  # This will return the average closing price for the last month
@@ -55,4 +60,4 @@ plt.title(f'{api.ticker} Historical Prices with SMA and EMA')
 plt.xlabel('Date')
 plt.ylabel('Price')
 plt.legend()
-plt.show()
+#plt.show()

@@ -5,7 +5,6 @@ import api as api
 
 # 252 trading days in a year, 21 trading days in a month, 63 trading days in a quarter
 # Beta = Covariance(Stock, Market) / Variance(Market)
-# Compare to "api.get_beta(api.ticker)"
 # Using the S&P 500 as the market benchmark
 
 # Get stock data for "stock"
