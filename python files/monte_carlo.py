@@ -7,7 +7,7 @@ api.ticker = "NVDA"  # Manual override
 ticker_history = api.get_stock_history(api.ticker, "1mo")
 ticker_close = ticker_history["Close"]
 
-# Calculate necessary values
+# Calculate values
 avg_return = np.mean(ticker_history["Close"].pct_change().dropna())
 variance = np.var(ticker_history["Close"].pct_change().dropna())
 drift = avg_return - (0.5 * variance)
@@ -18,6 +18,7 @@ pdr_log = np.log(ticker_close.iloc[-1] / ticker_close.iloc[-2])
 pdr_simple = (ticker_close.iloc[-1] - ticker_close.iloc[-2]) / ticker_close.iloc[-2]
 
 # Ensure all arrays are of the same length
+# Wacky way to do this, but works
 length = len(ticker_close)
 avg_return_list = [avg_return] * length
 variance_list = [variance] * length
@@ -26,6 +27,8 @@ pdr_log_list = [pdr_log] * length
 pdr_simple_list = [pdr_simple] * length
 
 # Create a DataFrame to store the results
+# Dataframes are used to store data in a table format
+#syntax is pd.DataFrame(data, index, columns)
 df = pd.DataFrame({
     'Close Prices': ticker_close.tolist(),
     'Average Return': avg_return_list,
@@ -36,6 +39,6 @@ df = pd.DataFrame({
 })
 
 # Write the DataFrame to a CSV file
-df.to_csv('retrieved_data.csv', index=False)
+df.to_csv('retrieved_data.csv', index=False) #save the data to a csv file
 
 print("Data has been retrieved and saved to 'retrieved_data.csv'")
