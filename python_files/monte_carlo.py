@@ -1,14 +1,7 @@
 import numpy as np
 import pandas as pd
-import sys
-import os
-import sys
-import os
-
-# Add the directory containing 'api.py' to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'api')))
-
 import api as api
+import os
 
 # Get stock data for "stock"
 api.ticker = "NVDA"  # Manual override
@@ -43,11 +36,19 @@ df = pd.DataFrame({
     'Price Daily Return (Simple)': pdr_simple_list
 })
 
+
+
+output_dir = '/mnt/c/Users/micha/OneDrive/Documents/GitHub/Stocks-Project/Cpp_files'
+output_path = os.path.join(output_dir, 'retrieved_data.csv')
+
+# Create directory if it doesn't exist
+os.makedirs(output_dir, exist_ok=True)
+
 # Write the DataFrame to a CSV file
-output_path = '/mnt/c/Users/micha/OneDrive/Documents/GitHub/Stocks-Project/Cpp_files/retrieved_data.csv'
 df.to_csv(output_path, index=False)
 
 print(f"Data has been retrieved and saved to '{output_path}'")
+
 
 # Get stock data for "stock"
 api.ticker = "NVDA"  # Manual override
