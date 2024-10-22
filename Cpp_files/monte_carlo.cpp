@@ -66,10 +66,14 @@ int main() {
         simulation_results.push_back(S);
     }
 
-    // Write simulation results to a CSV file
-    ofstream output_file("simulation_results.csv");
+    // Output directory
+    string output_directory = "/mnt/c/Users/micha/OneDrive/Documents/GitHub/Stocks-Project/python_files/"; // Change this to your desired directory
+    string output_file_path = output_directory + "simulation_results.csv";
+
+    // Write sim to CSV file
+    ofstream output_file(output_file_path);
     if (output_file.is_open()) {
-        // Write the header
+    // Write the header
         output_file << "Simulation,Predicted Price,Average Return,Log Return,Simple Return\n";
 
         // Write the data
