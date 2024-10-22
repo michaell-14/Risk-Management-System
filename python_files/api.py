@@ -114,17 +114,6 @@ def get_holdings(ticker):
 ticker = "SOXQ"
 
 #this is just saving the calls
-"""get_stock_info(ticker)
-get_stock_history(ticker)
-get_dividends(ticker)
-get_splits(ticker)
-get_actions(ticker)
-get_financials(ticker)
-get_balance_sheet(ticker)
-get_cashflow(ticker)
-get_earnings(ticker)
-get_sustainability(ticker)
-get_recommendations(ticker)"""""
 
 # Continuously get stock history; only update every 11 seconds; this was found by trial and error with the yfinance API
 #while True: #cntrl + c to stop
