@@ -1,81 +1,88 @@
 #include <iostream>
-#include <fstream> // std::ifstream; for file I/O
-#include <sstream> // std::stringstream; for string manipulation
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include <cmath>
+#include <cstdlib>  // For rand() and srand()
+#include <ctime>    // For time()
 
 using namespace std;
 
 int main() {
-    //Read
-    ifstream file("recieved_data.csv");
+    // Seed the random number generator
+    srand(static_cast<unsigned int>(time(0)));
+
+    // Read data from CSV file
+    ifstream file("retrieved_data.csv");
     string line;
     vector<double> close_prices;
     double avg_return, variance, drift, pdr_log, pdr_simple;
 
-    if (file.is_open()){
-        getline(file, line); // read the header
-        
-        while (getline(file, line)){
+    if (file.is_open()) {
+        getline(file, line); // Read the header
+
+        while (getline(file, line)) {
             stringstream ss(line);
             string value;
             getline(ss, value, ',');
-            close_prices.push_back(std::stod(value));        
+            close_prices.push_back(stod(value));
         }
-        //other values
+
+        // Read the other values
         file.clear();
-        file.seekg(0, std::ios::beg);
-        std::getline(file, line);  // Skip header
-        std::getline(file, line);  // Read first data line
-        std::stringstream ss(line);
-        std::string value;
-        std::getline(ss, value, ',');  // Skip close prices
-        std::getline(ss, value, ',');  // Average Return
-        avg_return = std::stod(value);
-        std::getline(ss, value, ',');  // Variance
-        variance = std::stod(value);
-        std::getline(ss, value, ',');  // Drift
-        drift = std::stod(value);
-        std::getline(ss, value, ',');  // Price Daily Return (Log)
-        pdr_log = std::stod(value);
-        std::getline(ss, value, ',');  // Price Daily Return (Simple)
-        pdr_simple = std::stod(value);
+        file.seekg(0, ios::beg);
+        getline(file, line);  // Skip header
+        getline(file, line);  // Read first data line
+        stringstream ss(line);
+        string value;
+        getline(ss, value, ',');  // Skip close prices
+        getline(ss, value, ',');  // Average Return
+        avg_return = stod(value);
+        getline(ss, value, ',');  // Variance
+        variance = stod(value);
+        getline(ss, value, ',');  // Drift
+        drift = stod(value);
+        getline(ss, value, ',');  // Price Daily Return (Log)
+        pdr_log = stod(value);
+        getline(ss, value, ',');  // Price Daily Return (Simple)
+        pdr_simple = stod(value);
 
         file.close();
     } else {
-        std::cerr << "Unable to open file";
+        cerr << "Unable to open file";
         return 1;
     }
-    //Simulations
+
+    // Number of simulations
     const int num_simulations = 1000;
     vector<double> simulation_results;
 
-
-    //Calculations
-    for (int i = 0; i < num_simulations; i++){
-        double ticker_std = sqrt(variance);
-        double z = ((double) rand()/RAND_MAX); // random number between 0 and 1; the (double) is to convert the rand() to a double
-        double s = close_prices.back() * exp(drift + ticker_std * z);
-        simulation_results.push_back(s);
-    }
-
-    // Print
+    // Perform simulations
     for (int i = 0; i < num_simulations; ++i) {
-        cout << "Simulation " << i + 1 << ": " << simulation_results[i] << endl;
+        double ticker_std = sqrt(variance);
+        double Z = static_cast<double>(rand()) / RAND_MAX;
+        double S = close_prices.back() * exp(drift + ticker_std * Z);
+        simulation_results.push_back(S);
     }
 
-    //Write
+    // Write simulation results to a CSV file
     ofstream output_file("simulation_results.csv");
-    if (output_file.is_open()){
-        output_file << "Simulation Results\n";
-        for (int i = 0; i < num_simulations; i++){
-            output_file << simulation_results[i] << "\n";
+    if (output_file.is_open()) {
+        // Write the header
+        output_file << "Simulation,Predicted Price,Average Return,Log Return,Simple Return\n";
+
+        // Write the data
+        for (int i = 0; i < num_simulations; ++i) {
+            output_file << i + 1 << "," << simulation_results[i] << "," << avg_return << "," << pdr_log << "," << pdr_simple << "\n";
         }
+
         output_file.close();
+        cout << "Simulation results have been written to 'simulation_results.csv'" << endl;
     } else {
-        std::cerr << "Unable to open file";
+        cerr << "Unable to open file for writing";
         return 1;
     }
+
     return 0;
 }
