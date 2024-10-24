@@ -47,7 +47,8 @@ df.to_csv(csv_file, index=False) #save the data to a csv file
 print("Data has been retrieved and saved to 'retrieved_data.csv'")
 
 # Move the CSV file to a different directory
-destination_directory = '/mnt/c/Users/micha/OneDrive/Documents/GitHub/Stocks-Project/Cpp_files'
+destination_directory = r'C:\Users\micha\OneDrive\Documents\GitHub\Stocks-Project\Cpp_files'
+#destination_directory = '/mnt/c/Users/micha/OneDrive/Documents/GitHub/Stocks-Project/Cpp_files'
 
 if not os.path.exists(destination_directory):
     os.makedirs(destination_directory)
@@ -57,7 +58,7 @@ shutil.move(csv_file, destination_path)
 
 print(f"File has been moved to '{destination_path}'")
 
-'''
+''' This is the original code, it works but goes into this directory
 # Write the DataFrame to a CSV file
 df.to_csv('retrieved_data.csv', index=False) #save the data to a csv file
 
