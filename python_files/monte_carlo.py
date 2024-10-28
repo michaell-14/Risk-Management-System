@@ -6,7 +6,7 @@ import shutil
 
 # Get stock data for "stock"
 api.ticker = "NVDA"  # Manual override
-ticker_history = api.get_stock_history(api.ticker, "1mo")
+ticker_history = api.get_stock_history(api.ticker, "5d")
 ticker_close = ticker_history["Close"]
 
 # Calculate values
