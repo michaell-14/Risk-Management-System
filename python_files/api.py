@@ -9,7 +9,7 @@ def get_stock_info(ticker):
     print(info)
     return info
 
-def get_stock_returns(ticker, period='1y'): #period = 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
+def get_stock_returns(ticker, period): #period = 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max
     stock = yf.Ticker(ticker)
     returns = stock.history(period=period)['Close'].pct_change()
     #print("Stock Returns:", ticker)
