@@ -45,12 +45,15 @@ plt.ylabel('Price')
 plt.title('Predicted Price over Simulations')
 plt.legend()
 #plt.show()'''
+
+ 
+#this is a histogram of the predicted prices, based from monte_carlo sims
 #bins is the number of bars in the histogram
 # Plot histogram with bars for predicted prices
 
 print("Predicted Price == ", predicted_price)
 plt.figure(figsize=(14, 7))
-plt.hist(df['Predicted Price'], bins=200, density=True, alpha=0.6, color='blue', label='Empirical Distribution')  # Creates histogram with bars
+plt.hist(df['Predicted Price'], bins=100, density=True, alpha=0.6, color='blue', label='Empirical Distribution')  # Creates histogram with bars
 # Overlay normal distribution as a line
 xmin, xmax = plt.xlim()  # Set the x-axis limits to match histogram
 x = np.linspace(xmin, xmax, 100)

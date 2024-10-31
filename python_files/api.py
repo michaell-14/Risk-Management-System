@@ -81,13 +81,8 @@ def get_recommendations(ticker):
 # Function to get current stock price using yfinance
 def get_current_stock_price(ticker):
     stock = yf.Ticker(ticker)
-    stock_info = stock.history(period='1d')
-    
-    # Extract the close price for the most recent day
-    if not stock_info.empty:
-        current_price = stock_info['Close'].iloc[-1]
-    else:
-        print(f"No data available for {ticker}")
+    stock_info = stock.history(period = "1d")
+    current_price = stock_info["Close"].iloc[-1]
     return current_price
 
 def get_fund_data(ticker):
