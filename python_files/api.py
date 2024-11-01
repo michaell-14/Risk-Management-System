@@ -105,6 +105,21 @@ def get_holdings(ticker):
     print("Equity Holdings:")
     print(holdings)
 
+#mass get function
+def etf_data():
+    get_current_stock_price(ticker)
+    get_stock_history(ticker)
+    get_fund_data(ticker)
+    get_holdings(ticker)
+
+def stock_data():
+    get_current_stock_price(ticker)
+    get_balance_sheet(ticker)
+    get_cashflow(ticker)
+    get_earnings(ticker)
+    get_sustainability(ticker)
+    get_recommendations(ticker)
+
 # Example usage
 ticker = "SOXQ"
 
