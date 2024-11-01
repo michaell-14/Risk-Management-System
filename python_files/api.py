@@ -81,9 +81,12 @@ def get_recommendations(ticker):
 # Function to get current stock price using yfinance
 def get_current_stock_price(ticker):
     stock = yf.Ticker(ticker)
-    stock_info = stock.history(period = "1d")
-    current_price = stock_info["Close"].iloc[-1]
-    return current_price
+    try :
+        current_price = stock.history(period = "1d")["Close"].iloc[-1]
+        return current_price
+    except:
+        print("Error: Invalid ticker symbol or Canadain Stock (unable to retrieve data)")
+        return None
 
 def get_fund_data(ticker):
     stock = yf.Ticker(ticker)

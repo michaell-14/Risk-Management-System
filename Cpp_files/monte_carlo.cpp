@@ -4,20 +4,22 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include <cstdlib>  // For rand() and srand()
+#include <random>   // For random_device, mt19937, normal_distribution
 #include <ctime>    // For time()
 
 using namespace std;
 
 int main() {
     // Seed the random number generator
-    srand(static_cast<unsigned int>(time(0)));
+    random_device rd;
+    mt19937 gen(rd());
+    normal_distribution<double> d(0, 1); //d for distribution
 
     // Read data from CSV file
     ifstream file("retrieved_data.csv");
     string line;
     vector<double> close_prices;
-    double avg_return, variance, drift, pdr_log, pdr_simple;
+    double avg_return, variance, drift, pdr_log;
 
     if (file.is_open()) {
         getline(file, line); // Read the header
@@ -45,8 +47,6 @@ int main() {
         drift = stod(value);
         getline(ss, value, ',');  // Price Daily Return (Log)
         pdr_log = stod(value);
-        getline(ss, value, ',');  // Price Daily Return (Simple)
-        pdr_simple = stod(value);
 
         file.close();
     } else {
@@ -61,7 +61,7 @@ int main() {
     // Perform simulations
     for (int i = 0; i < num_simulations; ++i) {
         double ticker_std = sqrt(variance);
-        double Z = static_cast<double>(rand()) / RAND_MAX;
+        double Z = d(gen); // Random number from standard normal distribution
         double S = close_prices.back() * exp(drift + ticker_std * Z);
         simulation_results.push_back(S);
     }
@@ -78,7 +78,7 @@ int main() {
 
         // Write the data
         for (int i = 0; i < num_simulations; ++i) {
-            output_file << i + 1 << "," << simulation_results[i] << "," << avg_return << "," << pdr_log << "," << pdr_simple << "\n";
+            output_file << i + 1 << "," << simulation_results[i] << "," << avg_return << "," << pdr_log << "\n";
         }
 
         output_file.close();

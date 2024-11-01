@@ -6,7 +6,7 @@ import shutil
 
 # Get stock data for "stock"
 api.ticker = "NVDA"  # Manual override
-ticker_history = api.get_stock_history(api.ticker, "5d")
+ticker_history = api.get_stock_history(api.ticker, "1mo")
 ticker_close = ticker_history["Close"]
 
 # Calculate values
@@ -17,7 +17,6 @@ ticker_std = np.std(ticker_history["Close"].pct_change().dropna())
 
 # Periodic daily return
 pdr_log = np.log(ticker_close.iloc[-1] / ticker_close.iloc[-2])
-pdr_simple = (ticker_close.iloc[-1] - ticker_close.iloc[-2]) / ticker_close.iloc[-2]
 
 # Ensure all arrays are of the same length
 # Wacky way to do this, but works
@@ -26,7 +25,7 @@ avg_return_list = [avg_return] * length #multiply the average return by the leng
 variance_list = [variance] * length
 drift_list = [drift] * length
 pdr_log_list = [pdr_log] * length
-pdr_simple_list = [pdr_simple] * length
+
 
 # Create a DataFrame to store the results
 # Dataframes are used to store data in a table format
@@ -37,7 +36,6 @@ df = pd.DataFrame({
     'Variance': variance_list,
     'Drift': drift_list,
     'Price Daily Return (Log)': pdr_log_list,
-    'Price Daily Return (Simple)': pdr_simple_list
 })
 
 #Write the DataFrame to a CSV file
