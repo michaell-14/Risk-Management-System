@@ -58,7 +58,7 @@ int main() {
     const int num_simulations = 5000;
     vector<double> simulation_results;
 
-    // Perform simulations
+    // Perform simulations; Geometric Brownian Motion
     for (int i = 0; i < num_simulations; ++i) {
         double ticker_std = sqrt(variance);
         double Z = d(gen); // Random number from standard normal distribution
@@ -74,7 +74,7 @@ int main() {
     ofstream output_file(output_file_path);
     if (output_file.is_open()) {
     // Write the header
-        output_file << "Simulation,Predicted Price,Average Return,Log Return,Simple Return\n";
+        output_file << "Simulation,Predicted Price,Average Return,Log Return\n";
 
         // Write the data
         for (int i = 0; i < num_simulations; ++i) {

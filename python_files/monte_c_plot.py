@@ -32,22 +32,46 @@ total_count = len(predicted_price) #this should equal the number of sims request
 hist, bin_edges = np.histogram(df['Predicted Price'], bins=5000)
 
 # Find the bin with the highest frequency --> most probable value
-max_bin_index = np.argmax(hist) 
-most_prob_val = (bin_edges[max_bin_index] + bin_edges[max_bin_index + 1]) / 2
+max_bin_index = np.argmax(hist) #argmax() returns the indices of the maximum values along an axis; in this case, the index of the bin with the highest frequency
+max_freq = np.max(hist) #max() returns the maximum value of the array; in this case, the highest frequency
+print(max_freq)
+max_bins = np.where(hist == max_freq) #where() returns the indices of an array where condition is satisfied
+
+#print(max_bins) --> this is a tuple, we need to index it to get the actual value
+
+max_bin_indices = max_bins[0] #need to do this to get the indices of the bins with the highest frequency, otherwise it returns a tuple and we dont want that
+midpoints = (bin_edges[max_bin_indices] + bin_edges[max_bin_indices + 1]) / 2
+print(midpoints)
+
+most_probable_price = np.mean(midpoints)
+#most_probable_price1 = midpoints[0] #this has nothing to do with the most probable price, this is just the midpoint of the first bin with the highest frequency, therefore doesnt mean much to me
+
+print(f"Most probable price: {most_probable_price}") #this gives an estimate of the most probable price, with cents of the closing based on testing
+
+#print(f"Most probable price1: {most_probable_price1}") #this is inaccurate, dont use this
+
+#raw plotting yipeee
+plt.figure(figsize=(14, 7))
+plt.plot(bin_edges[1:], hist)  # Plot histogram
+plt.axhline(y=hist[max_bin_index], color='g', linestyle='--', label='Max Frequency')  # Add horizontal line for most probable price
+plt.axvline(x=most_probable_price, color='r', linestyle='--', label='Most Probable Price')  # Add vertical line for most probable price
+plt.xlabel('Predicted Price')
+plt.ylabel('Frequency')
+plt.legend()
+plt.title('Raw Histogram of Predicted Prices')
+plt.show()
 #above line is like: (x1 + x2) / 2, where x1 and x2 are the edges of the bin with the highest frequency, this is just the bin that is the highest on the plot
 #except using the bin edges from histogram; max_bin_index is the index of the bin with the highest frequency, +1 is the next bin
 
-print(f"Most Probable Predicted Price: {most_prob_val}")
 
-
-#Plot histogram with bars for predicted prices
 
 plt.figure(figsize=(14, 7))
-plt.hist(df['Predicted Price'], bins=100, density=True, alpha=0.6, color='blue', label='Empirical Distribution')  # Creates histogram with bars
+plt.hist(df['Predicted Price'], bins=250, density=True, alpha=0.6, color='blue', label='Empirical Distribution')  # Creates histogram with bars
 # Overlay normal distribution
 xmin, xmax = plt.xlim()  # Set the x-axis limits to match histogram
 x = np.linspace(xmin, xmax, 100)
 p = norm.pdf(x, avg_price, std_dev_price)
+
 plt.plot(x, p, 'k', linewidth=2, label='Normal Distribution (PDF)')  # Overlay PDF as a lined
 plt.xlabel('Predicted Price')
 plt.ylabel('Density')

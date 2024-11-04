@@ -16,7 +16,7 @@ drift = avg_return - (0.5 * variance)
 ticker_std = np.std(ticker_history["Close"].pct_change().dropna())
 
 # Periodic daily return
-pdr_log = np.log(ticker_close.iloc[-1] / ticker_close.iloc[-2])
+pdr_log = np.log(ticker_close.iloc[-1] / ticker_close.iloc[-2]) #pdr_log is the log of the last close price divided by the second to last close price
 
 # Ensure all arrays are of the same length
 # Wacky way to do this, but works
