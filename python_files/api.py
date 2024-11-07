@@ -16,7 +16,7 @@ def get_stock_returns(ticker, period): #period = 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 
     #print(returns)
     return returns
 
-def get_stock_history(ticker, period='ytd'):
+def get_stock_history(ticker, period):
     stock = yf.Ticker(ticker)
     history = stock.history(period=period)
     #print("Stock History:", ticker)
