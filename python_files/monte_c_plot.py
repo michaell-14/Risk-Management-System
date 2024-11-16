@@ -3,6 +3,7 @@ import numpy as np
 import monte_carlo as mc #this is the main monte carlo file, all the functions are in there and declarations
 from numpy.random import normal
 from scipy.stats import norm
+import api
 
 plt.close('all')
 
@@ -47,8 +48,9 @@ most_probable_price = np.mean(midpoints)
 #most_probable_price1 = midpoints[0] #this has nothing to do with the most probable price, this is just the midpoint of the first bin with the highest frequency, therefore doesnt mean much to me
 
 print(f"Most probable price: {most_probable_price}") #this gives an estimate of the most probable price, with cents of the closing based on testing
+a=api.get_current_stock_price(api.ticker)
+print(f"Current Price: {a}")
 
-#print(f"Most probable price1: {most_probable_price1}") #this is inaccurate, dont use this
 
 #raw plotting yipeee
 plt.figure(figsize=(14, 7))
@@ -78,3 +80,6 @@ plt.ylabel('Density')
 plt.title('Histogram of Predicted Prices with Normal PDF Overlay')
 plt.legend()
 #plt.show()  
+
+a=api.get_current_stock_price(api.ticker)
+print(a)

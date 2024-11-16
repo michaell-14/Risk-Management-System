@@ -55,7 +55,7 @@ int main() {
     }
 
     // Number of simulations
-    const int num_simulations = 5000;
+    const int num_simulations = 10000;
     vector<double> simulation_results;
 
     // Perform simulations; Geometric Brownian Motion

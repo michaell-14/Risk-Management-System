@@ -5,7 +5,7 @@ import os
 import shutil
 
 # Get stock data for "stock"
-api.ticker = "ARM"  # Manual override
+api.ticker = "NVDA"  # Manual override
 ticker_history = api.get_stock_history(api.ticker, "1mo")
 ticker_close = ticker_history["Close"]
 
